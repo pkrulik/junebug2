@@ -1,142 +1,177 @@
-    // HEADER IMAGE FADE IN AND OUT
-    var slideShow = function() {
-            //Settings
-            var slider = $('#home_bg_img_slider');
-            var slide = 'li';
-            var transition_time = 5000;
-            var time_between_slides = 200;
-
-            function slides() {
-                return slider.find(slide);
+// START NAMED FUNCTIONS
+    function clickLinkToScroll() {
+        $('a').click(function() {
+            var target = $(this).attr('href');
+            if ($(this).attr('href') === '#top_wrapper') {
+                var top = $(target).offset().top - 1;
+            } else if ($(this).hasClass('secondary_nav') ) {
+                var top = $(target).offset().top - 90;
+            } else {
+                var top = $(target).offset().top - 60;
             }
-            slides().first().addClass('visible');
-            slides().first().fadeIn(1000);
-            setInterval(
+            $('body').scrollTo(top, 500, {
+                'axis': 'y',
+                easing: 'easeInCubic'
+            });
+            return false;
+        });
+    }
+    
+    function clickListToScroll() {
+        $('li').click(function () {
+	        var target = $(this),
+	            top = target.offset().top - 60;
+	        $(window).scrollTo(top, 500, {
+	            'axis': 'y',
+	            easing: 'easeInCubic'
+	        });
+        });
+    }
+        
+    function loadWorkSection(work_id) {
+        $.ajax({
+            type: 'GET',
+            url: work_id + '.php',
+            success: function(content) {            	
+                $('#' + work_id + '.work_content').html(content);
+                clickLinkToScroll();
+                setTimeout(function() {
+                    $('#' + work_id + '.client_information').hide();
+                    $('#' + work_id + ' #youtube').show();
+	                $('#' + work_id + '.work_content').slideDown('slow');
+                }, 1000);
+            }
+        });
+    }
+    
+    function unloadWorkSection(work_id) {
+        $.ajax({
+            type: 'GET',
+            url: '',
+            success: function(content) {            	
+                $('#' + work_id + '.work_content').html(content);
+			}
+        });
+    }
+    
+   function slideShow() {
+        //Settings
+        var slider = $('#home_bg_img_slider');
+        var slide = 'li';
+        var transition_time = 5000;
+        var time_between_slides = 200;
 
-	            function() {
-	                var findActiveIndex = slider.find(slide + ".visible").index();
-	                slides().eq(findActiveIndex).removeClass('visible');
-	                slides().eq(findActiveIndex).fadeOut(transition_time, "easeInOutExpo");
-	                if (slides().length === findActiveIndex + 1) {findActiveIndex = -1;}
-	                slides().eq(findActiveIndex + 1).fadeIn(transition_time, "easeInOutExpo");
-	                slides().eq(findActiveIndex + 1).addClass('visible');
-	            }, time_between_slides + transition_time
-	        );
-        };
-    slideShow();
-    // SCROLLY STUFF
+        function slides() {
+            return slider.find(slide);
+        }
+        slides().first().addClass('visible');
+        slides().first().fadeIn(1000);
+        setInterval(
+
+        function() {
+            var findActiveIndex = slider.find(slide + '.visible').index();
+            slides().eq(findActiveIndex).removeClass('visible');
+            slides().eq(findActiveIndex).fadeOut(transition_time, 'easeInOutExpo');
+            if (slides().length === findActiveIndex + 1) {
+                findActiveIndex = -1;
+            }
+            slides().eq(findActiveIndex + 1).fadeIn(transition_time, 'easeInOutExpo');
+            slides().eq(findActiveIndex + 1).addClass('visible');
+        }, time_between_slides + transition_time);
+    };
+    
+//END NAMED FUNCTIONS    
+    
+    
+//CALL NAMED FUNCTIONS ON LOAD
+	slideShow();
+	clickLinkToScroll();
+	clickListToScroll();
+	
+//END NAMED FUNCTIONS ON LOAD
+    
+    
+//START SCROLLY STUFF
     $(window).scroll(function() {
-        //var navTop = $('nav').offset().top;
-        var workTop = $('#work_preview').offset().top;
-        var navTop = 90;
+        var workTop = $('#work_preview').offset().top,
+            workPreviewBottom = $('.work_preview').offset().top + $('.work_preview').outerHeight(true) - 100,
+            navTop = 90,
+            topScroll = $(window).scrollTop(); 
+
         // if we haven't scrolled to the nav
         // keep the bg images at 100% opacity
         if ($(window).scrollTop() < navTop) {
             $('nav').removeClass('nav_fixed');
             $('.red_bar').removeClass('red_bar_visible');
-            $('#work_bar').stop().animate({opacity:1});
+            $('#work_bar').stop().animate({
+                opacity: 1
+            });
             $('#navigation li a').removeClass('nav_link_color_white').addClass('nav_link_color_black');
             $('.home_bg_img').stop().animate({
                 opacity: 1
-            }, 500, "easeInOutSine");
+            }, 500, 'easeInOutSine');
         }
         // if we've scrolled to the nav
         // fade the images to 25% opacity
         // display newly styled navigation bar
         if ($(window).scrollTop() > 90 - 10) {
             $('nav').addClass('nav_fixed');
-            $('#work_bar').stop().animate({opacity:0});
+            $('#work_bar').stop().animate({
+                opacity: 0
+            });
             $('.red_bar').addClass('red_bar_visible');
             $('#navigation li a').removeClass('nav_link_color_black').addClass('nav_link_color_white');
         }
         if ($(window).scrollTop() > workTop - 100) {
             $('.home_bg_img').stop().animate({
                 opacity: 0
-            }, 500, "easeInOutSine");
+            }, 500, 'easeInOutSine');
         }
-    });
-    // CLICK LINK AND SCROLL TO
-    $('#work').click(function() {
-        var target = $(this).attr('href');
-        if ($(this).attr('href') === "#container") {
-            var top = $(target).offset().top - 1;
-            $('body').scrollTo(top, 500, {
-                'axis': 'y',
-                easing: 'easeOutCubic'
-            });
-            $('.work_content').slideUp(500);
-            $('.work_preview').removeClass('open').addClass('closed');
-        } else {
-            var top = $(target).offset().top - 60;
-            $('body').scrollTo(top, 500, {
-                'axis': 'y',
-                easing: 'easeInCubic'
-            });
-        }
-        return false;
-    });
-    //CLICK ON WORK AND ACTIVATE ACCORDION 
-    $('.work_content').hide();
-    $('li.work_preview').click(function() {
-        var target = $(this);
-        var top = target.offset().top - 60;
-        var work_id = target.attr('id');
-        var content_height = target.next().height();
         
-        if (target.hasClass('open')) {
-            target.next().slideToggle(500);
-            target.removeClass('open').addClass('closed');
-        } else {
-            $(window).scrollTo(top, 500, {
-                'axis': 'y',
-                easing: 'easeInCubic'
-            });
-
-			target.next().load(work_id + '.php');
-			$('#container').css({"margin-bottom":content_height});
-            setTimeout(function() {
-                target.next().slideToggle(500);
-                target.removeClass('closed').addClass('open');
-            }, 1000);
-			}
-        if ($('.work_preview').hasClass('open')) {
-            $('.work_content').slideUp(500);
-            $('.work_preview').removeClass('open').addClass('closed');
+        //FIX SECONDARY NAV TO TOP
+        //NEEDS TO BE SPECIFIC TO EACH SECTION
+        if ($(window).scrollTop() >= workPreviewBottom) {
+            $('#secondary_nav').addClass('fixed');
+            
         }
+        if ($(window).scrollTop() < workPreviewBottom) {
+            $('#secondary_nav').removeClass('fixed');
+        }
+
+    });
+    
+//END SCROLLY STUFF
+
+//START WORK SECTION
+	$('li.work_content').hide();
+
+	// CLICK WORK PREVIEW
+	// LOAD WORK CONTENT
+	// SLIDE CONTAINER DOWN
+    $('li.work_preview.closed').click(function() {
+        var work_id = $(this).attr('id');
+		clickListToScroll();
+        loadWorkSection(work_id);
+        $(this).removeClass('closed').addClass('open');
         return false;
     });
     
-// Click About
-// Load Div
-// Fade Current Content Out
-// Slide Div In
+    // CLOSE THE WORK SECTION
+    $('.close_button').click(function(){
+	    var work_id = $(this).attr('id'); 
+	    $('#' + work_id + '.work_content').slideUp();
+	    $('#' + work_id + ' ' + '#youtube').hide();
+        $('.client_information' + '#' + work_id).show();
+        unloadWorkSection(work_id);
+        return false;
+    });
+    
+//END WORK SECTION   
+
+if ( $('li').hasClass('open') ) {	
+}
+
 $('#about').click(function(){
-	$('#work_container').addClass('slide_out');
-	$('#about_container').load('about.php');
-	$('#about_container').removeClass('bottom').addClass('slide_in');
+	$('#about_section').removeClass('right_off_screen').addClass('center_on_screen');
+	$('#work_container').addClass('left_off_screen');
 });
-
-$(window).load(function(){
-	$('#work_container').load('work.php');
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

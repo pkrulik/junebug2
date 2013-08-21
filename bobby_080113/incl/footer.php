@@ -1,6 +1,6 @@
         <script src = "js/jquery-1.9.0.min.js"></script>
         <script src="js/plugins-ck.js"></script>
-        <script src="js/main-ck.js"></script>
+        <script src="js/main.js"></script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>

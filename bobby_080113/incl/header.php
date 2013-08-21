@@ -25,8 +25,8 @@
         <nav>
 	        <ul id = "navigation">
 		        <li class = "first"><a id = "work" class = "nav_link_color_black" href = "#work_preview">THE WORK</a></li>
-		        <li><a id = "about" class = "nav_link_color_black" href = "#a">ABOUT</a></li>
-		        <li class = "via_logo"><a href = "#container"><img src="img/nav_logo.png" alt="nav_logo" width="74" height="74"></a></li>
+		        <li><a id = "about" class = "nav_link_color_black" href = "#top_wrapper">ABOUT</a></li>
+		        <li class = "via_logo"><a href = "#top_wrapper"><img src="img/nav_logo.png" alt="nav_logo" width="74" height="74"></a></li>
 		        <li><a class = "nav_link_color_black" href = "news.php">NEWS</a></li>
 		        <li><a class = "nav_link_color_black" href = "contact.php">CONTACT</a></li>
 	        </ul>
