@@ -173,5 +173,5 @@ if ( $('li').hasClass('open') ) {
 
 $('#about').click(function(){
 	$('#about_section').removeClass('right_off_screen').addClass('center_on_screen');
-	$('#work_container').addClass('left_off_screen');
+	$('#work_container').addClass('right_off_screen');
 });
