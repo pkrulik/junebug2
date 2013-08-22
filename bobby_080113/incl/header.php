@@ -25,9 +25,18 @@
         <nav>
 	        <ul id = "navigation">
 		        <li class = "first"><a id = "work" class = "nav_link_color_black" href = "#work_preview">THE WORK</a></li>
-		        <li><a id = "about" class = "nav_link_color_black" href = "#top_wrapper">ABOUT</a></li>
+		        <li><a id = "about" class = "nav_link_color_black" href = "#work_preview">ABOUT</a></li>
 		        <li class = "via_logo"><a href = "#top_wrapper"><img src="img/nav_logo.png" alt="nav_logo" width="74" height="74"></a></li>
-		        <li><a class = "nav_link_color_black" href = "news.php">NEWS</a></li>
-		        <li><a class = "nav_link_color_black" href = "contact.php">CONTACT</a></li>
+		        <li><a id = "news" class = "nav_link_color_black" href = "news.php">NEWS</a></li>
+		        <li><a id = "contact" class = "nav_link_color_black" href = "contact.php">CONTACT</a></li>
 	        </ul>
         </nav>
+
+    	<ul id = "home_bg_img_slider">
+        	<li class = "slide1"><img class = "home_bg_img" src="img/bg_home.jpg" alt="bg_home" width="1245" height="1125"></li>
+			<li class = "slide2"><img class = "home_bg_img" src="img/bg_home_2.jpg" alt="bg_home_2" width="1245" height="1125"></li>
+        	<li class = "slide3"><img class = "home_bg_img" src="img/bg_home_3.jpg" alt="bg_home_3" width="1245" height="1125"></li>
+			<li class = "slide4"><img class = "home_bg_img" src="img/bg_home_4.jpg" alt="bg_home_4" width="1245" height="1125"></li>
+        	<li class = "slide5"><img class = "home_bg_img" src="img/bg_home_5.jpg" alt="bg_home_5" width="1245" height="1125"></li>
+			<li class = "slide6"><img class = "home_bg_img" src="img/bg_home_6.jpg" alt="bg_home_6" width="1245" height="1125"></li>
+    	</ul>

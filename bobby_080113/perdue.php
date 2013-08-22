@@ -1,5 +1,5 @@
 
-						<div id = "secondary_nav" class = "work_nav">
+						<div class = "secondary_nav_wrapper">
 							<ul>
 								<li><a class = "secondary_nav active" href = "#perdue">Case Study</a></li>
 								<li><a class = "secondary_nav" href = "#overview">Overview</a></li>
