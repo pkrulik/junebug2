@@ -1,0 +1,542 @@
+@import 'normalize';
+@import 'bootstrap-responsive.min';
+@import 'bigvideo';
+
+
+/*
+ * HTML5 Boilerplate
+ *
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ */
+
+/* ==========================================================================
+   Base styles: opinionated defaults
+   ========================================================================== */
+
+html,
+button,
+input,
+select,
+textarea {
+    color: #222;
+}
+
+body {
+    line-height: 1.4;
+    font-size:100%;
+}
+
+/*
+ * Remove text-shadow in selection highlight: h5bp.com/i
+ * These selection declarations have to be separate.
+ * Customize the background color to match your design.
+ */
+
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+/*
+ * A better looking default horizontal rule
+ */
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+/*
+ * Remove the gap between images and the bottom of their containers: h5bp.com/i/440
+ */
+
+img {
+    vertical-align: middle;
+}
+
+/*
+ * Remove default fieldset styles.
+ */
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+/*
+ * Allow only vertical resizing of textareas.
+ */
+
+textarea {
+    resize: vertical;
+}
+
+/* ==========================================================================
+   Chrome Frame prompt
+   ========================================================================== */
+
+.chromeframe {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0 0;
+}
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+/* LESS STYLES */
+
+
+$red: #ee3a29;
+$white: #fff;
+$black: #000;
+$grey: #555;
+$grey_light: #999;
+$full-width: 100%;
+$center-column-width: 95%;
+
+@mixin transition_one() {transition:all .5s ease-in-out; -webkit-transition:all 1s ease-in-out ease-in-out; -o-transition:all 1s; -moz-transition:all 1s ease-in-out;}
+
+#googleMap {border:1px solid #222; width:auto; height:100px; width:100px;}
+
+
+body {background:black;}
+/* END LESS STYLES */
+#main_wrapper {width:$full-width; height:auto; z-index:2;}
+
+img.logo {position:fixed; top:25px; z-index:100; @include transition_one(); left:50%; margin-left:-25px;
+	&:hover {-webkit-transform:rotate(180deg); -moz-transform:rotate(180deg); -o-transform:rotate(180deg);}
+	&.logo-top {top:5px;}
+}
+
+nav {width:$full-width; display:block; z-index:99; background:$red;
+	&.not-fixed {position:relative;}
+	&.fixed {position:fixed; top:0; margin-top:0 !important;}
+	ul{ padding:0; margin:0 auto; width:100%;
+		li {float:left;  margin:0; padding:0; width:25%; font-size:20px; text-align:center; text-transform:uppercase;
+			a {padding:10px 0; font-weight:bold; @include transition_one(); background: url(../img/nav_border.jpg) no-repeat $white;
+				&.active {background:$red; color:$white;}
+				&:hover {opacity:.7;}
+			}
+			&:first-child {border:none;}
+			a {text-decoration:none; display:block; color:$black;}
+			span {font-size:10px; display:block;}
+		}
+	}
+}
+
+.center-column {background:rgba(255, 255, 255, .75); position:relative; width:$full-width;
+	
+	
+	ul#work_preview {padding:0px;}
+	#work_preview{ width:$full-width; margin:0 auto;
+		li {list-style-type:none;}
+		.work-preview, .culture-preview {width:$full-width; margin: 20px auto 0px auto; transition: all 1s; 
+			&:first-child {margin-top:0px;}
+			&:last-child {margin-bottom:20px;}
+			img {width:100%;}
+			.vimeo {display:none; width:100%; background:$black; margin:0; padding:0; position:relative;
+				&.show {display:inherit; width:100%; background:$black; margin:0; padding:0; position:relative;}
+				.close_button {position:fixed; color:#fff; z-index:80; display:block; background:#555; height:40px; width: 40px; text-align:center; line-height:40px; right:0%; top:80px; font-size:15px; transition: all 1s;
+					&.not_fixed {position:relative; float:right;}
+					&:hover {background:#666; cursor:pointer;}
+				}
+				iframe {padding:0; margin:0; height:100%; width:100%; position:relative;}
+			}
+			.client_information { transition: all 1s; margin:0; padding:0; height:auto; display:block;
+				&:hover {cursor:pointer; opacity:.85;}
+				img {background:$black;}
+			}
+			&.open {width:70%; margin-bottom:0px;}
+			&.closed {width:65%;}
+		}
+	}
+		
+	.work.close_button {color:#fff; z-index:80; display:block; background:#555; right:0px; top:100px; height:40px; width: 40px; text-align:center; line-height:40px; font-size:15px; transition: all 1s; display:none;
+		&:hover {background:#666; cursor:pointer;}
+		&.not_fixed {position:absolute;}
+		&.fixed {position:fixed;}	
+	}
+		
+/* 	.white_background {background:$white; width:100%; height:0px; position:absolute; z-index:0; left:0px; opacity:1;} */
+	
+	.work_content {width:100%; margin:0 auto;
+		.box {background:$grey; display:block; float:left; text-align:center; color:$white;}
+		.box.last {margin-right:0px;}
+		.third {width:32%; height:310px; margin: 0 3% 2% 0;}
+		.half {width:48%; height:250px; margin: 0 4% 2% 0;}
+		.two_third {width:65%; height:150px; margin: 0 2% 2% 0;}
+		.full {width:100%; height:200px; display:block;}
+		.back_to_top { text-align:center; text-transform: uppercase;
+			&:hover {cursor:pointer;}
+			a {color:$black; text-decoration:none; text-transform:capitalize; text-decoration:underline; }
+		}
+		
+		.fixed_width {width:$center_column_width; margin:0 auto;}
+		.full_width {width:70%; margin:0 auto;
+			&.white {background:$white; opacity:1; padding-top:1px; padding-bottom:1px;}
+		}
+		
+		.work_section {padding:40px 0px;}
+		
+		.two_column {
+			.left {float:left; width:45%;
+				.box {margin-top:40px; background: $grey; height:200px; text-align:center; line-height:200px; color:$white; width:100%;}
+			}
+			.right {float:right; width:45%; text-align:center;
+			}
+		} 
+		
+		.client_logo { text-align:center; position:relative;
+			img.client_logo {width:75%; height:auto; margin-top:12.2%;}		
+		}
+		
+		.video_player {margin:0px 0 10px 0; width:100%; position:relative;
+			iframe {width:100%; height:100%;}
+		}
+		
+		ul.video_buttons {padding:0px; list-style-type: none; margin:0px auto 10px auto; display:block; height:auto; 
+			li {background:url(../img/nav_border.jpg) no-repeat $white; width:33.333%; text-align:center; display:inline-block; padding:10px 0px; margin:0px; float:left;
+				&:last-child {margin-right:0;}
+				a {color:$black; text-decoration:none; font-weight:bold;
+					&.active {color:$white; text-decoration:none;}
+				}
+				span {display:block; font-size:10px;}
+			&.active {background:$red;}
+			&:hover {opacity:.5; cursor:pointer;}
+			}
+		}
+		
+		.gallery {padding:600px 0px;
+			img {width:100%; height:auto;}
+		}
+		
+	}
+	
+	h2.section_header {font-size:14px; margin: 20px 0px 0px 0px; color:#999;}
+	#inside_scoop {padding:50px 0px;}
+	
+	.culture-preview, .fixed_width, .news_article_preview {
+		h4 {color:#fff; float:right; font-size:11px; margin:0; padding:3px 10px; background:#444; width:auto; display:inline; font-weight:300; line-height:11px;}
+	}
+	
+	.secondary_nav_wrapper { margin:0; padding:0; width: 100%; background:#555; position:absolute; top:62px; z-index:100; 
+		&.fixed {position:fixed; top:62px; z-index:198;}
+		ul { margin: 0 auto; padding: 0px 0px; width:70%;
+			&.narrow {width:65%;}
+			li {margin:0px; padding:0px; list-style-type:none; display:inline; float:left;  @include transition_one(); height:22px; line-height:20px;
+				&:hover {background:#666;}
+				&.active{background:#444;}
+				a {color: $white; font-size:11px; text-align:center; text-decoration:none;  padding: 3px 10px; 
+					&.active {background:#444;}
+				}
+				&.next_client {float:right;}
+			}
+		}
+	}
+	
+			li.news_article_preview:last-child {margin-bottom:100px !important;}
+
+	
+	.news_article_preview {text-align:center; @include transition_one();
+		h4 {}
+		.news_article_information {padding:50px !important; background:#fff;
+			&:hover {background:$red;
+				h2 {text-decoration:none;}
+			}
+			h2 {text-decoration:underline;}
+			h3 {}
+			
+			img {background:none !important; width:auto !important;}
+			&.news_content {text-align:right !important;}
+		}
+		&.article_section {padding-top:10px !important;
+			a {color:$red;
+				&:hover {opacity:.75;}
+			}
+		}
+	}
+	
+	.button {margin:20px auto; width:20%; text-align:center; line-height:15px; padding:8px 10px; background:$red !important; display:block; @include transition_one();
+		&:hover {opacity:.75;}
+		a {color:#fff; text-decoration:none; font-size:14px;}
+	}
+
+	
+	.news {background: $white; text-align:center; 
+		span {display:block;}
+		h2 {text-transform:uppercase; font-size:60px; line-height:55px;}
+		p {font-size:15px; font-weight:normal; margin:0; color:$black;}
+		a {text-decoration:underline; color:$black;}
+	}
+	
+	.jobs {text-align:center; background-color:rgba(0, 0, 0, .5); color:$white;
+		span {display:block;}
+		p {font-size:15px; font-weight:normal; margin:0; color:$white;}
+		h2 {text-transform:uppercase; font-size:60px; line-height:55px;}
+		a {text-decoration:underline; color:$black;}
+	}
+	
+	footer { background:$black;
+		.footer {margin:0 auto;
+			.left {width:50%; float:left;
+				a, p {color:$white; text-align:right; width:100%; display:block; margin-right:10px; line-height:4px;}
+			}
+			.right {width:50%; float:right;
+				img {width:40%; height:auto; margin-left:20px;}
+			}
+		}
+	}
+	
+	.whaat {background:green; width:100%;}
+	#overview {padding:60px 0px;}
+		
+} /* == END OF CENTER COLUMN == */
+
+/* == GLOBALS == */
+h2 {font-size:30px; line-height:30px; margin:0 0 20px 0;}
+.clear {clear:both;}
+.eighty-percent {width:$center-column-width;}
+.one-hundred-percent {width:$full-width; padding:60px 0px;}
+
+
+.section_content {background:$white; border-radius:2px;}
+
+.employee {width:30%; float:left; margin-right:3%;
+	.employee_image {background:$grey; height:275px;}
+}
+.inside_story {text-align:center; margin-top:5%;}
+.creative_director {width:75%; height:auto;}
+
+
+#client-logos {width:100%; height:auto;}
+
+.center-column #overview.no_padding {padding:0 !important;}
+
+
+/* BIG VIDEO STUFF */
+video {}
+#big-video-wrap{overflow:hidden;position:fixed;height:100%;width:100%;top:0;left:0;}
+#big-video-vid,#big-video-image{position:absolute; }
+#big-video-control-container{position:fixed;bottom:20px;padding: 0 20px;width:100%;
+  -webkit-transition-duration:0.6s;-moz-transition-duration:0.6s;-ms-transition-duration:0.6s;-o-transition-duration:0.6s;transition-duration:0.6s;}
+#big-video-control{width:100%;height:16px;position:relative;}
+#big-video-control-middle{margin: 0 56px 0 24px;}
+#big-video-control-bar{width:100%;height:16px;position:relative;cursor:pointer;}
+#big-video-control-progress{position:absolute;top:7px;height:3px;width:0%;background:#fff;}
+#big-video-control-track{position:absolute;top:8px;height:1px;width:100%;background:#fff;}
+#big-video-control-bound-left{left:0;}
+#big-video-control-bound-right{right:-1px}
+#big-video-control-track .ui-slider-handle {opacity:0;}
+#big-video-control-playhead{left:30%;}
+#big-video-control-play{position:absolute;top:0;left:0;height:16px;width:16px;background-image:url('bigvideo.png');}
+#big-video-control-timer{position:absolute;top:1px;right:0;color:#fff;font-size:11px;}
+#big-video-control-playhead,#big-video-control-bound-left,#big-video-control-bound-right{position:absolute;top:0;height:16px;width:1px;background:#fff;}
+#big-video-control .ui-slider-handle{border-left:solid 1px #fff; width:16px;height:16px;position:absolute;top:-8px;}
+.transparent{-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";filter:alpha(opacity=0);-moz-opacity:0;-khtml-opacity:0;opacity:0;}
+.vjs-big-play-button{display:none !important;}
+
+
+/* ==========================================================================
+   Helper classes
+   ========================================================================== */
+
+/*
+ * Image replacement
+ */
+
+.ir {
+    background-color: transparent;
+    border: 0;
+    overflow: hidden;
+    /* IE 6/7 fallback */
+    *text-indent: -9999px;
+}
+
+.ir:before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 150%;
+}
+
+/*
+ * Hide from both screenreaders and browsers: h5bp.com/u
+ */
+
+.hidden {
+    display: none !important;
+    visibility: hidden;
+}
+
+/*
+ * Hide only visually, but have it available for screenreaders: h5bp.com/v
+ */
+
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+/*
+ * Extends the .visuallyhidden class to allow the element to be focusable
+ * when navigated to via the keyboard: h5bp.com/p
+ */
+
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+}
+
+/*
+ * Hide visually and from screenreaders, but maintain layout
+ */
+
+.invisible {
+    visibility: hidden;
+}
+
+/*
+ * Clearfix: contain floats
+ *
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    `contenteditable` attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that receive the `clearfix` class.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+
+.clearfix:before,
+.clearfix:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+/*
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+
+.clearfix {
+    *zoom: 1;
+}
+
+/* ==========================================================================
+   EXAMPLE Media Queries for Responsive Design.
+   Theses examples override the primary ('mobile first') styles.
+   Modify as content requires.
+   ========================================================================== */
+
+@media only screen and (min-width: 35em) {
+    /* Style adjustments for viewports that meet the condition */
+}
+
+@media print,
+       (-o-min-device-pixel-ratio: 5/4),
+       (-webkit-min-device-pixel-ratio: 1.25),
+       (min-resolution: 120dpi) {
+    /* Style adjustments for high resolution devices */
+}
+
+/* ==========================================================================
+   Print styles.
+   Inlined to avoid required HTTP connection: h5bp.com/r
+   ========================================================================== */
+
+@media print {
+    * {
+        background: transparent !important;
+        color: #000 !important; /* Black prints faster: h5bp.com/s */
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
+
+    /*
+     * Don't show links for images, or javascript/internal links
+     */
+
+    .ir a:after,
+    a[href^="javascript:"]:after,
+    a[href^="#"]:after {
+        content: "";
+    }
+
+    pre,
+    blockquote {
+        border: 1px solid #999;
+        page-break-inside: avoid;
+    }
+
+    thead {
+        display: table-header-group; /* h5bp.com/t */
+    }
+
+    tr,
+    img {
+        page-break-inside: avoid;
+    }
+
+    img {
+        max-width: 100% !important;
+    }
+
+    @page {
+        margin: 0.5cm;
+    }
+
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
+
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
+}

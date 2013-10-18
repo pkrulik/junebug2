@@ -1,5 +1,7 @@
 // START NAMED FUNCTIONS
 
+var test = 100;
+
 function loadWork() {
     $.ajax({
         type: 'GET',
@@ -11,15 +13,15 @@ function loadWork() {
     });
 }
 
-function clickLinkToScroll() {
-    $('a').click(function() {
+function clickLink() {
+    $('a.closed').click(function() {
         var target = $(this).attr('href'),
             section = $(this).attr('id');
         $.ajax({
             type: 'GET',
             url: section + '.php',
             success: function(content) {
-                $('.container').fadeOut().html(content).fadeIn();
+                $('.container').fadeOut().html(content).fadeIn('slow');
                 if (section === 'work') {
                     workEffects();
                 }
@@ -52,7 +54,7 @@ function loadClientWork(work_id) {
         url: work_id + '.php',
         success: function(content) {
             $('#' + work_id + '.work_content').html(content);
-            clickLinkToScroll();
+            clickLink();
             setTimeout(function() {
                 $('#' + work_id + '.client_information').hide();
                 $('#' + work_id + ' #youtube').show();
@@ -73,6 +75,7 @@ function workEffects() {
         var work_id = $(this).attr('id');
         loadClientWork(work_id);
         $(this).removeClass('closed').addClass('open');
+		var secondaryNavTop = $('.secondary_nav_wrapper').offset().top + $('.secondary_nav_wrapper').outerHeight(true);
         return false;
     });
     // CLOSE THE WORK SECTION
@@ -84,7 +87,7 @@ function workEffects() {
         return false;
     });
     // SCROLL WORK PREVIEW TO TOP OF PAGE
-    $('li').click(function() {
+    $('li.work_preview').click(function() {
         var target = $(this),
             top = target.offset().top - 60;
         $(window).scrollTo(top, 500, {
@@ -92,7 +95,18 @@ function workEffects() {
             easing: 'easeInCubic'
         });
     });
-    //END WORK SECTION   
+    
+    //FIX SECONDARY NAV TO TOP
+    //NEEDS TO BE SPECIFIC TO EACH SECTION
+    $(window).scroll(function() {
+	    if ($(window).scrollTop() > secondaryNavTop) {
+	        $('.secondary_nav_wrapper').addClass('fixed');
+	    }
+	    if ($(window).scrollTop() < secondaryNavTop) {
+	        $('.secondary_nav_wrapper').removeClass('fixed');
+	    }
+	});
+    
 }
 
 function slideShow() {
@@ -124,7 +138,7 @@ function slideShow() {
 //CALL NAMED FUNCTIONS ON LOAD
 slideShow();
 loadWork();
-clickLinkToScroll();
+clickLink();
 scrollyStuff();
 //END NAMED FUNCTIONS ON LOAD
 //START SCROLLY STUFF
@@ -133,7 +147,6 @@ function scrollyStuff() {
     $(window).scroll(function() {
         var sectionContentTop = $('.section_content').offset().top,
             sectionContentBottom = $('.section_content').offset().top + $('.section_content').outerHeight(true) - 100,
-/*             secondaryNavTop = $('.secondary_nav_wrapper').offset().top + $('.secondary_nav_wrapper').outerHeight(true), */
             navTop = 90,
             topScroll = $(window).scrollTop();
         // if we haven't scrolled to the nav
@@ -164,14 +177,6 @@ function scrollyStuff() {
             $('.home_bg_img').stop().animate({
                 opacity: 0
             }, 500, 'easeInOutSine');
-        }
-        //FIX SECONDARY NAV TO TOP
-        //NEEDS TO BE SPECIFIC TO EACH SECTION
-        if ($(window).scrollTop() > secondaryNavTop) {
-            $('.secondary_nav_wrapper').addClass('fixed');
-        }
-        if ($(window).scrollTop() < secondaryNavTop) {
-            $('.secondary_nav_wrapper').removeClass('fixed');
         }
     });
     //END SCROLLY STUFF
